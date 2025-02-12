@@ -7,9 +7,6 @@ import  Navbar  from './components/Navbar'
 import Register from './components/createAccount/Register'
 
 
-import Phase1 from './components/Admin/Phase1'
-import Phase2 from './components/Admin/Phase2'
-import Phase3 from './components/Admin/Phase3'
 import { Dashboard } from './components/Dashboard'
 import { DContext } from './context/Datacontext'
 
@@ -112,8 +109,6 @@ export const App = () => {
 }
    
     <Routes>
-      
-     
       <Route path='/' element={Auth ? <Dashboard/> : <Login/>}></Route>
       <Route path='/login' element={<Login/>}></Route>
       <Route path='/create-account' element={<Register/>}></Route>
@@ -121,15 +116,6 @@ export const App = () => {
       <Route path='/Update-device/:rangeid' element={<Updatedata/>}></Route>
       <Route path='/Chart-data/:chartid' element={<Chartdevice/>}></Route>
       <Route path='/VoltagePredictor' element={<VoltagePredictor/>}></Route>
-    
-      <Route path='/phase1' element={<Phase1/>}></Route>
-      <Route path='/phase2' element={<Phase2/>}></Route>
-      <Route path='/phase3' element={<Phase3/>}></Route>
-
-
-
-
-      
     </Routes>
 
     

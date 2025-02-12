@@ -36,7 +36,7 @@ const Navbar = () => {
         {/* Logo / Brand */}
 
       
-        <a className="navbar-brand fw-bold" href="/">
+        <a className="navbar-brand fw-bold text-light" href="/">
           EMS
         </a>
        

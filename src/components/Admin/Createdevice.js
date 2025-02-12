@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext} from "react";
 import { DContext } from "../../context/Datacontext";
 
 export const Createdevice = () => {
@@ -29,12 +29,6 @@ export const Createdevice = () => {
     vibrationValue: "",
     vibrationLow: "",
     vibrationHigh: "",
-    currentUnitValue: "",
-    currentUnitLow: "",
-    currentUnitHigh: "",
-    deviceFlowValue: "",
-    deviceFlowLow: "",
-    deviceFlowHigh: "",
     energyValue: "",
     energyLow : "",
     energyHigh:"",
@@ -69,6 +63,7 @@ export const Createdevice = () => {
         .then(data => {
           if (data.success === true) {
             setDevicedata(data.message)
+            alert(data.message)
             
            
           }
@@ -130,8 +125,8 @@ export const Createdevice = () => {
             { label: "Power Factor", value: "powerFactorValue", low: "powerFactorLow", high: "powerFactorHigh" },
             { label: "Temperature", value: "temperatureValue", low: "temperatureLow", high: "temperatureHigh" },
             { label: "Vibration", value: "vibrationValue", low: "vibrationLow", high: "vibrationHigh" },
-            { label: "Current Unit", value: "currentUnitValue", low: "currentUnitLow", high: "currentUnitHigh" },
-            { label: "Device Flow", value: "deviceFlowValue", low: "deviceFlowLow", high: "deviceFlowHigh" },
+           
+           
             { label: "Energy", value: "energyValue", low: "energyLow", high: "energyHigh" },
             { label: "Frequency", value: "frequencyValue", low: "frequencyLow", high: "frequencyHigh" },
           ].map((item, index) => (

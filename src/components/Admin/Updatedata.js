@@ -17,8 +17,9 @@ export const Updatedata = () => {
     powerfactor: { value: "", low: "", high: "" },
     tempeature: { value: "", low: "", high: "" },
     vibration: { value: "", low: "", high: "" },
-    currentunit: { value: "", low: "", high: "" },
-    deviceflow: { value: "", low: "", high: "" },
+    energy: {value : "" , low : "" , high : ""},
+    frequency : {value :"" , low : "", high : ""},
+    
   });
 
   console.log("upadte formadata",formData)
@@ -114,8 +115,9 @@ export const Updatedata = () => {
             { label: "Power Factor", key: "powerfactor" },
             { label: "Tempeature", key: "tempeature" },
             { label: "Vibration", key: "vibration" },
-            { label: "Current Unit", key: "currentunit" },
-            { label: "Device Flow", key: "deviceflow" },
+            { label: "Energy", key:"energy"  },
+            { label: "Frequency", key:"frequency" },
+
           ].map((item, index) => (
             <div className="mb-3" key={index}>
               <label className="form-label">{item.label}</label>
