@@ -36,14 +36,15 @@ export const Login = () => {
         if (data.success) {
           setDisplay(data.message);
           setAuth(data.user);
-          window.location.reload();
+          window.location.reload()
+         
         } else {
           setDisplay(data.message);
         }
       })
       .catch((err) => {
-        console.log("Error", err);
-        alert("Catch error");
+        console.log("Error ", err);
+        alert("Server is busy please try agian later");
       });
   };
 

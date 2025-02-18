@@ -11,26 +11,25 @@ function Datacontext(props) {
 
 
     useEffect(()=>{
-        
-          fetch(`${apiurl}/checkauth`,{
-            method:"GET",
-            credentials:'include'
-          })
-          .then(res=>res.json())
-          .then(data=>{
-            if(data.success === true){
-              setAuth(data.user)
-              
-              
-            }
-            else{
-              console.log(data.messsage)
-            }
-          })
-          .catch(err=>{
-            console.log("error fetching to username",err)
-          })
-    
+
+      if(apiurl){
+        fetch(`${apiurl}/checkauth`,{
+          method:"GET",
+          credentials:'include'
+        })
+        .then(res=>res.json())
+        .then(data=>{
+          if(data.success === true){
+            setAuth(data.user)
+          }
+          else{
+            console.log(data.messsage)
+          }
+        })
+        .catch(err=>{
+          console.log("error fetching in checkauth",err)
+        })
+      }
     
       },[apiurl])
 

@@ -59,7 +59,7 @@ export const Dashboard = () => {
                     <td>{new Date(device.createdAt).toLocaleString()}</td>
                     <td>
                       <div className="d-flex flex-wrap gap-2 justify-content-center">
-                        <button className="btn btn-warning btn-sm" onClick={handlePredictive}>
+                        <button className="btn btn-warning  btn-sm" onClick={handlePredictive}>
                           Predictive
                         </button>
                         <button className="btn btn-danger btn-sm" onClick={() => handleDefect(device.deviceId)}>

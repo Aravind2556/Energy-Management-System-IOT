@@ -19,8 +19,7 @@ const Navbar = () => {
       .then(data => {
         if (data.success === true) {
           navigate('/')
-          window.location.reload()
-
+          window.location.reload('/')
         }
         else {
           console.log(data.message)
@@ -31,7 +30,7 @@ const Navbar = () => {
       })
   }
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-primary fixed-top">
+    <nav className=" bg-primary bg-gradient navbar navbar-expand-lg navbar-light  fixed-top">
       <div className="container">
         {/* Logo / Brand */}
 

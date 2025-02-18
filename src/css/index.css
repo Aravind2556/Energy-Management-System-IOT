@@ -144,6 +144,11 @@
   }
 
 
+  .bg-gradient-primary {
+    background: linear-gradient(90deg, rgb(2, 241, 66), rgb(37, 161, 62)) !important;
+  }
+
+
 
 
 
