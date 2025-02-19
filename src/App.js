@@ -16,6 +16,7 @@ import { Chartdevice } from './components/Admin/Chartdevice'
 import VoltagePredictor from './components/Admin/VoltagePredictor'
 import Loading from './components/Loading'
 import { UserInfo } from './components/Admin/UserInfo'
+import UserDetails from './components/Admin/UserDetails'
 
 
 export const App = () => {
@@ -125,6 +126,7 @@ export const App = () => {
       <Route path='/Chart-data/:chartid' element={<Chartdevice/>}></Route>
       <Route path='/VoltagePredictor' element={<VoltagePredictor/>}></Route>
       <Route path='/UserInfo' element={<UserInfo/>}></Route>
+      <Route path='/user/:id' element={<UserDetails/>}></Route>
     </Routes>
 
     

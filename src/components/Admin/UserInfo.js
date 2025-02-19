@@ -1,62 +1,48 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import Loading from '../Loading';
+import { DContext } from '../../context/Datacontext';
 
 export const UserInfo = () => {
-    const apiurl = process.env.REACT_APP_API_URL;
 
-    const [user,setUser]=useState(null)
-    console.log("user collection data", user )
+    const {users} = useContext(DContext)
 
 
-    useEffect(()=>{
-        fetch(`${apiurl}/fetch-users`,{
-            method:"GET",
-            credentials:'include'
-          })
-          .then(res=>res.json())
-          .then(data=>{
-            console.log("data:",data)
-            if(data.success === true){
-              setUser(data.users)
-              alert(data.message)
-            }
-            else{
-                alert(data.message)
-            }
-          })
-          .catch(err=>{
-            console.log("error fetching in checkauth",err)
-          })
-      
-    },[])
+
+    if(users===null){
+      return <Loading/>
+    }
+
+    console.log("users:",users)
 
   return (
-    <div>
+    <div style={{minHeight: '80vh'}}>
+          <h2 className='text-center my-3 fw-bolder'>Users List</h2>
             {/* Device Table */}
-            <div className="table-responsive">
+          <div className="table-responsive mx-auto col-12 col-md-10 col-lg-8 my-2">
           <table className="table table-bordered text-center">
-            <thead className="table-dark">
+            <thead className="table-primary">
               <tr>
                 <th>Sl. No</th>
-                <th>Device ID</th>
+                <th>Assigned Devices</th>
                 <th>User ID</th>
-                <th>Time</th>
+                <th>Name</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              {user && user.length > 0 ? (
-                user.map((users, index) => (
-                  <tr key={users.deviceId}>
+              {users && users.length > 0 ? (
+                users.map((user, index) => (
+                  <tr key={user.deviceId}>
                     <td>{index + 1}</td>
-                    <td>{users.Name}</td>
-                    <td>{users.userid}</td>
-                    <td>{new Date(users.createdAt).toLocaleString()}</td>
-
+                    <td>{user.devices?user.devices.length:0}</td>
+                    <td>{user.userid||"-"}</td>
+                    <td>{user.Name}</td>
+                    <td><i className='bi bi-eye fs-5 mx-2' onClick={() => window.location.href=`/user/${user.Id}`} role='button'></i></td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="5">No Devices Available</td>
+                  <td colSpan="5 text-center">No Devices Available</td>
                 </tr>
               )}
             </tbody>

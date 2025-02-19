@@ -37,17 +37,21 @@ export const Dashboard = () => {
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h2>Dashboard</h2>
 
-          {Auth?.Role === "Admin" && (
-            <button className="btn btn-primary" onClick={handleUser}>
-              User Info
-            </button>
-          )}
+          <div className="d-flex flex-wrap justify-content-center gap-2 align-items-center">
+            {Auth?.Role === "Admin" && (
+              <button className="btn btn-primary" onClick={handleUser}>
+                User Info
+              </button>
+            )}
 
-          {Auth?.Role === "Admin" && (
-            <button className="btn btn-primary" onClick={handleDevice}>
-              + Create Device
-            </button>
-          )}
+            {Auth?.Role === "Admin" && (
+              <button className="btn btn-primary" onClick={handleDevice}>
+                + Create Device
+              </button>
+            )}
+          </div>
+
+          
         </div>
 
         {/* Device Table */}
@@ -72,20 +76,16 @@ export const Dashboard = () => {
                     <td>{new Date(device.createdAt).toLocaleString()}</td>
                     <td>
                       <div className="d-flex flex-wrap gap-2 justify-content-center">
-                        <button className="btn btn-warning  btn-sm" onClick={handlePredictive}>
-                          Predictive
-                        </button>
-                        <button className="btn btn-danger btn-sm" onClick={() => handleDefect(device.deviceId)}>
-                          Monitor
-                        </button>
-                        {Auth?.Role === "Admin" && (
-                          <button className="btn btn-secondary btn-sm" onClick={() => handleUpdate(device.deviceId)}>
-                            Edit
-                          </button>
 
-                        )}
-
-                        
+                        <div className="bg-dark px-2 rounded border border-dark" role="button" title="Prediction" onClick={handlePredictive}>
+                          <i class="bi bi-clipboard-data text-primary"></i>
+                        </div>
+                        <div className="bg-dark px-2 rounded border border-dark" role="button" title="Monitor" onClick={() => handleDefect(device.deviceId)}>
+                          <i class="bi bi-graph-up text-primary"></i>
+                        </div>
+                        <div className="bg-dark px-2 rounded border border-dark" role="button" title="Edit" onClick={() => handleUpdate(device.deviceId)}>
+                          <i class="bi bi-pencil text-primary"></i>
+                        </div>                        
                
                       </div>
                     </td>

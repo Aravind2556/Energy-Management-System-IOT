@@ -7,12 +7,31 @@ function Datacontext(props) {
     const [Auth,setAuth]=useState(null)
     const [User,setUser]=useState(null)
     const [Device,setdevice]=useState(null)
-   
+    const [users, setUsers] = useState(null)
+
 
 
     useEffect(()=>{
 
       if(apiurl){
+
+        fetch(`${apiurl}/fetch-users`,{
+          method:"GET",
+          credentials:'include'
+        })
+        .then(res=>res.json())
+        .then(data=>{
+          if(data.success === true){
+            setUsers(data.users)
+          }
+          else{
+              alert(data.message)
+          }
+        })
+        .catch(err=>{
+          console.log("error fetching in checkauth",err)
+        })
+
         fetch(`${apiurl}/checkauth`,{
           method:"GET",
           credentials:'include'
@@ -30,11 +49,7 @@ function Datacontext(props) {
         .catch(err=>{
           console.log("error fetching in checkauth",err)
         })
-      }
-    
-      },[apiurl])
 
-      useEffect(()=>{
         fetch(`${apiurl}/fetch-user`,{
           method:"GET",
           credentials:'include'
@@ -53,60 +68,35 @@ function Datacontext(props) {
         .catch(err=>{
           console.log("error fetching to username",err)
         })
+
+        fetch(`${apiurl}/fetch-user-device`,{
+          method:"GET",
+          credentials:'include'
+        })
+        .then(res=>res.json())
+        .then(data=>{
+          if(data.success === true){
+            setdevice(data.data)
+            
+            
+            
+          }
+          else{
+            console.log(data.messsage)
+          }
+        })
+        .catch(err=>{
+          console.log("error fetching to username",err)
+        })
+
+      }
+
+    },[apiurl])
   
 
-      },[apiurl])
-
-        useEffect(()=>{
-      
-          fetch(`${apiurl}/fetch-user-device`,{
-            method:"GET",
-            credentials:'include'
-          })
-          .then(res=>res.json())
-          .then(data=>{
-            if(data.success === true){
-              setdevice(data.data)
-              
-              
-              
-            }
-            else{
-              console.log(data.messsage)
-            }
-          })
-          .catch(err=>{
-            console.log("error fetching to username",err)
-          })
-      
-        },[apiurl])
-
-    // useEffect(()=>{
-
-    //   fetch(`${apiurl}/fetch-user-device`,{
-    //     method:"GET",
-    //     credentials:'include'
-    //   })
-    //   .then(res=>res.json())
-    //   .then(data=>{
-    //     if(data.success === true){
-    //       setdeviceuser(data.data)
-          
-          
-    //     }
-    //     else{
-    //       console.log(data.messsage)
-    //     }
-    //   })
-    //   .catch(err=>{
-    //     console.log("error fetching to username",err)
-    //   })
-      
-    // },[apiurl])
 
 
-
-    const data = {Auth,setAuth,User,Device}
+    const data = {Auth,setAuth,User,Device, users}
 return (
    
 
