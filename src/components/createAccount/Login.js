@@ -3,9 +3,10 @@ import PowermangeUser from "../../assets/undraw_mobile-user_qc9c.png";
 import PowermangeAdmin from "../../assets/undraw_add-notes_9xls.png";
 import { DContext } from "../../context/Datacontext";
 
+
 export const Login = () => {
   const apiurl = process.env.REACT_APP_API_URL;
-  const { setAuth } = useContext(DContext);
+  const { setAuth,Auth } = useContext(DContext);
   const [display, setDisplay] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -39,6 +40,7 @@ export const Login = () => {
           window.location.reload()
          
         } else {
+          alert(data.message)
           setDisplay(data.message);
         }
       })
@@ -47,6 +49,7 @@ export const Login = () => {
         alert("Server is busy please try agian later");
       });
   };
+
 
   return (
     <div className="container d-flex flex-column align-items-center justify-content-center min-vh-100">

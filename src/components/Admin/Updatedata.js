@@ -59,7 +59,7 @@ export const Updatedata = () => {
         .then(data => {
           if (data.success === true) {
             alert(data.message)
-            window.location.reload()
+            window.location.href='/'
   
           } else {
             alert(data.message)

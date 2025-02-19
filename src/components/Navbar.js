@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DContext } from '../context/Datacontext';
+import LOGO from '../../src/assets/EMS Logo.png'
 
 
 const Navbar = () => {
@@ -30,18 +31,18 @@ const Navbar = () => {
       })
   }
   return (
-    <nav className=" bg-primary bg-gradient navbar navbar-expand-lg navbar-light  fixed-top">
+    <nav className=" bg-primary bg-gradient navbar navbar-expand-lg navbar-light  sticky-top">
       <div className="container">
         {/* Logo / Brand */}
 
+        <img src={LOGO} alt='logo...' style={{height : "40px" , objectFit : "contain", padding : "5px"}} />
+
       
-        <a className="navbar-brand fw-bold text-light" href="/">
-          EMS
-        </a>
+
        
 
         
-        <button className="btn btn-dark" onClick={isLogout}>{Auth === null  ? 'Login' : 'Logout' }</button>
+        <button className="btn btn-outline-dark" onClick={isLogout}>{Auth === null  ? 'Login' : 'Logout' }</button>
        
         
         {/* Toggle Button for Mobile */}

@@ -39,22 +39,9 @@ export const Register = () => {
       .then(res=>res.json())
       .then(data=>{
         if(data.success === true){
+          alert(data.message)
           setDisplay(data.message)
-
-          console.log("current user",data.data)
-
-          if(data.data.Role === "User"){
-            navigate('/')
-          }
-          else if(data.data.Role === "Admin"){
-
-            navigate('/')
-
-          }
-
-
-          
-
+          navigate('/')   
         }
         else{
           setDisplay(data.message)

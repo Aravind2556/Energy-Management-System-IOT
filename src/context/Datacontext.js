@@ -23,6 +23,7 @@ function Datacontext(props) {
             setAuth(data.user)
           }
           else{
+            setAuth(false)
             console.log(data.messsage)
           }
         })

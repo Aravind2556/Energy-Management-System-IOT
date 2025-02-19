@@ -1,5 +1,6 @@
 import React, { useState, useContext} from "react";
 import { DContext } from "../../context/Datacontext";
+import { Navigate } from "react-router-dom";
 
 export const Createdevice = () => {
   const apiurl = process.env.REACT_APP_API_URL;
@@ -64,11 +65,11 @@ export const Createdevice = () => {
           if (data.success === true) {
             setDevicedata(data.message)
             alert(data.message)
-            
-           
+            window.location.href='/'
           }
           else {
             setDevicedata(data.message)
+            alert(data.message)
           }
         })
         .catch(err => {

@@ -14,6 +14,8 @@ import { Createdevice } from './components/Admin/Createdevice'
 import { Updatedata } from './components/Admin/Updatedata'
 import { Chartdevice } from './components/Admin/Chartdevice'
 import VoltagePredictor from './components/Admin/VoltagePredictor'
+import Loading from './components/Loading'
+import { UserInfo } from './components/Admin/UserInfo'
 
 
 export const App = () => {
@@ -22,32 +24,38 @@ export const App = () => {
    const navigate = useNavigate()
    const {Auth}=useContext(DContext)
 
-  const handlephase = (phase) => {
-    if (phase === 'all') {
-      setActiveTab('all')
-      navigate('/Dashboard')
+  // const handlephase = (phase) => {
+  //   if (phase === 'all') {
+  //     setActiveTab('all')
+  //     navigate('/Dashboard')
       
       
-    }
-    else if (phase === 'phase1') {
-      setActiveTab('phase1')
-      navigate('/phase1')
+  //   }
+  //   else if (phase === 'phase1') {
+  //     setActiveTab('phase1')
+  //     navigate('/phase1')
       
      
-    }
-    else if (phase === 'phase2') {
-      setActiveTab('phase2')
-      navigate('/phase2')
+  //   }
+  //   else if (phase === 'phase2') {
+  //     setActiveTab('phase2')
+  //     navigate('/phase2')
       
       
-    }
-    else if (phase === 'phase3') {
-      setActiveTab('phase3')
-      navigate('/phase3')
+  //   }
+  //   else if (phase === 'phase3') {
+  //     setActiveTab('phase3')
+  //     navigate('/phase3')
      
       
-    }
+  //   }
+  // }
+
+  if(Auth===null){
+    return <Loading/>
   }
+
+
   return (
     <div>
 
@@ -59,7 +67,7 @@ export const App = () => {
      <a href='/phase3'>Phase 3</a>
     </div> */}
 
-{
+{/* {
   window.location.pathname === '/' && window.location.pathname === '/login' && window.location.pathname === '/create-account' && (
     <div className="glide d-flex justify-content-center ">
     <div className="tabs position-relative bg-white shadow-sm p-3 rounded-pill d-flex gap-3">
@@ -106,16 +114,17 @@ export const App = () => {
     </div>
   </div>
   ) 
-}
+} */}
    
     <Routes>
-      <Route path='/' element={Auth ? <Dashboard/> : <Login/>}></Route>
+      <Route path='/' element={Auth!==false ? <Dashboard/> : <Login/>}></Route>
       <Route path='/login' element={<Login/>}></Route>
       <Route path='/create-account' element={<Register/>}></Route>
       <Route path='/create-device' element={<Createdevice/>}></Route>
       <Route path='/Update-device/:rangeid' element={<Updatedata/>}></Route>
       <Route path='/Chart-data/:chartid' element={<Chartdevice/>}></Route>
       <Route path='/VoltagePredictor' element={<VoltagePredictor/>}></Route>
+      <Route path='/UserInfo' element={<UserInfo/>}></Route>
     </Routes>
 
     

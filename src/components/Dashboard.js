@@ -24,12 +24,25 @@ export const Dashboard = () => {
     navigate("/VoltagePredictor");
   };
 
+  const handleUser = () => {
+    navigate('/UserInfo')
+  }
+
+
+
   return (
     <div className="Dashboard">
       <div className="container mt-4">
         {/* Header with Create Device button */}
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h2>Dashboard</h2>
+
+          {Auth?.Role === "Admin" && (
+            <button className="btn btn-primary" onClick={handleUser}>
+              User Info
+            </button>
+          )}
+
           {Auth?.Role === "Admin" && (
             <button className="btn btn-primary" onClick={handleDevice}>
               + Create Device
@@ -69,7 +82,11 @@ export const Dashboard = () => {
                           <button className="btn btn-secondary btn-sm" onClick={() => handleUpdate(device.deviceId)}>
                             Edit
                           </button>
+
                         )}
+
+                        
+               
                       </div>
                     </td>
                   </tr>
