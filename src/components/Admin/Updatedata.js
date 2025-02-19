@@ -57,6 +57,7 @@ export const Updatedata = () => {
       })
         .then(res => res.json())
         .then(data => {
+          console.log("update res:",data)
           if (data.success === true) {
             alert(data.message)
             window.location.href='/'
@@ -83,10 +84,10 @@ export const Updatedata = () => {
   return (
     <div className="container mt-4">
       <div className="card p-4 shadow-lg">
-        <h2 className="text-center mb-4">Update Device</h2>
+        <h2 className="text-center text-primary mb-4">Device Details</h2>
         <form onSubmit={handleSubmit}>
           {/* Device ID (Read Only) */}
-          <div className="mb-3">
+          <div className="mb-2">
             <label className="form-label">Device ID</label>
             <input
               type="text"
@@ -97,7 +98,7 @@ export const Updatedata = () => {
           </div>
 
           {/* User ID (Read Only) */}
-          <div className="mb-3">
+          <div className="mb-2">
             <label className="form-label">User ID</label>
             <input
               type="text"
@@ -119,10 +120,11 @@ export const Updatedata = () => {
             { label: "Frequency", key:"frequency" },
 
           ].map((item, index) => (
-            <div className="mb-3" key={index}>
+            <div className="mb-2" key={index}>
               <label className="form-label">{item.label}</label>
               <div className="d-flex gap-3">
                 <input
+                  readOnly
                   type='text'
                   className="form-control"
                   name={`${item.key}.value`}
@@ -132,6 +134,7 @@ export const Updatedata = () => {
                   required
                 />
                 <input
+                  readOnly
                   type='text'
                   className="form-control"
                   name={`${item.key}.low`}
@@ -141,6 +144,7 @@ export const Updatedata = () => {
                   required
                 />
                 <input
+                  readOnly
                   type='text'
                   className="form-control"
                   name={`${item.key}.high`}
@@ -153,9 +157,9 @@ export const Updatedata = () => {
             </div>
           ))}
 
-          <button type="submit" className="btn btn-primary w-100">
+          {/* <button type="submit" className="btn btn-primary w-100">
             Update Device
-          </button>
+          </button> */}
         </form>
       </div>
     </div>

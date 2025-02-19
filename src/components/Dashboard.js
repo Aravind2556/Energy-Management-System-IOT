@@ -3,7 +3,7 @@ import { DContext } from "../context/Datacontext";
 import { useNavigate } from "react-router-dom";
 
 export const Dashboard = () => {
-  const { Device, Auth } = useContext(DContext);
+  const { Device, Auth, apiurl } = useContext(DContext);
   const navigate = useNavigate();
 
   const handleDevice = () => {
@@ -12,8 +12,35 @@ export const Dashboard = () => {
     }
   };
 
+  const handleDelete = (deviceId) => {
+
+    if(apiurl){
+
+      fetch(`${apiurl}/delete-device/${deviceId}`, {
+        method: 'DELETE',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include"
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert(data.message)
+        if (data.success === true) {
+          window.location.reload()
+        }
+      })
+      .catch(err => {
+        console.log("Error in deleting device", err);
+        alert("Trouble in connecting to the server");
+      });
+
+    }
+
+  };
+
   const handleUpdate = (deviceId) => {
-    navigate(`/Update-device/${deviceId}`);
+    navigate(`/device/${deviceId}`);
   };
 
   const handleDefect = (deviceId) => {
@@ -84,7 +111,10 @@ export const Dashboard = () => {
                           <i class="bi bi-graph-up text-primary"></i>
                         </div>
                         <div className="bg-dark px-2 rounded border border-dark" role="button" title="Edit" onClick={() => handleUpdate(device.deviceId)}>
-                          <i class="bi bi-pencil text-primary"></i>
+                          <i class="bi bi-eye text-primary"></i>
+                        </div> 
+                        <div className="bg-dark px-2 rounded border border-dark" role="button" title="Delete" onClick={() => handleDelete(device.deviceId)}>
+                          <i class="bi bi-trash text-primary"></i>
                         </div>                        
                
                       </div>

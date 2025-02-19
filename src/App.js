@@ -122,7 +122,7 @@ export const App = () => {
       <Route path='/login' element={<Login/>}></Route>
       <Route path='/create-account' element={<Register/>}></Route>
       <Route path='/create-device' element={<Createdevice/>}></Route>
-      <Route path='/Update-device/:rangeid' element={<Updatedata/>}></Route>
+      <Route path='/device/:rangeid' element={<Updatedata/>}></Route>
       <Route path='/Chart-data/:chartid' element={<Chartdevice/>}></Route>
       <Route path='/VoltagePredictor' element={<VoltagePredictor/>}></Route>
       <Route path='/UserInfo' element={<UserInfo/>}></Route>

@@ -96,7 +96,7 @@ function Datacontext(props) {
 
 
 
-    const data = {Auth,setAuth,User,Device, users}
+    const data = {Auth,setAuth,User,Device, users, apiurl}
 return (
    
 
