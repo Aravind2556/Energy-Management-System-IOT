@@ -38,7 +38,6 @@ export const Createdevice = () => {
     frequencyHigh:"",
   });
 
-  console.log("Device inputs", formData)
 
 
 
