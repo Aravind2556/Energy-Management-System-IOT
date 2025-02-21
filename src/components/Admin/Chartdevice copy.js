@@ -5,7 +5,6 @@ import { DContext } from "../../context/Datacontext";
 import waringbeep from "../../assets/warning-beep.mp3"; // Beep sound file path
 import Loading from "../Loading";
 import Livechart from '../Admin/AccGyroChart'
-import { time } from "framer-motion/dom";
 
 export const Chartdevice = () => {
 
@@ -24,19 +23,11 @@ export const Chartdevice = () => {
   const [Gy, setGy] = useState(null);
   const [Gz, setGz] = useState(null);
 
-  const [voltage, setVoltage] = useState(null);
-  const [current, setCurrent] = useState(null);
-  const [power, setPower] = useState(null);
-  const [energy, setEnergy] = useState(null);
-  const [frequency, setFrequency] = useState(null);
-  const [powerfactor, setPowerfactor] = useState(null);
-  const [temperature, setTemperature] = useState(null);
-
   const controls = {
     show: true,
     download: true,
-    selection: false,
-    zoom: false,
+    selection: true,
+    zoom: true,
     zoomin: true,
     zoomout: true,
     pan: true,
@@ -134,12 +125,16 @@ export const Chartdevice = () => {
             const latestFeed = feeds[feeds.length - 1]; // Get the latest feed
             setLastFeedTimestamp(latestFeed.created_at)
             const latestFeedId = latestFeed.entry_id; // Unique ID of the latest feed
+
             // If the last processed ID is the same, don't trigger alerts again
             if (lastProcessedId === latestFeedId) return;
+
             setLastProcessedId(latestFeedId); // Update the processed ID
+
             const timestamps = feeds.map((feed) =>
               new Date(feed.created_at).toLocaleTimeString()
             );
+
             const fields = [
               { key: "field1", name: "Voltage", color: "black", type: "line" },
               { key: "field2", name: "Current", color: "red", type: "bar" },
@@ -150,13 +145,17 @@ export const Chartdevice = () => {
               { key: "field7", name: "Temperature", color: "#FFA500", type: "line" },
               // { key: "field8", name: "Vibrati/on", color: "#008080", type: "bar" },
             ];
+
             let newAlerts = [];
+
             const chartData = fields
               .map((field) => {
                 const values = feeds
                   .map((feed) => Number(feed[field.key]))
                   .filter((v) => !isNaN(v));
+
                 if (values.length === 0) return null;
+
                 const latestValue = values[values.length - 1];
                 const deviceParam = Infrom[field.name.toLowerCase()];
                 if (deviceParam) {
@@ -169,6 +168,7 @@ export const Chartdevice = () => {
                     }
                   }
                 }
+
                 return {
                   name: field.name,
                   data: values,
@@ -181,68 +181,15 @@ export const Chartdevice = () => {
                 };
               })
               .filter(Boolean);
+
+
             if (newAlerts) {
+
               setAlerts(newAlerts);
+
             }
+
             setLiveChartData(chartData);
-
-            const xAxisData = feeds.map((feed) =>
-              new Date(feed.created_at).getTime()
-            )
-
-            const voltageRecords = feeds.map(data => data.field1)
-            setVoltage({
-              "x-axis": xAxisData,
-              "y-axis": voltageRecords,
-              color: "black",
-              seriesName: 'voltage'
-            })
-            const currentRecords = feeds.map(data => data.field2)
-            setCurrent({
-              "x-axis": xAxisData,
-              "y-axis": currentRecords,
-              color: "red",
-              seriesName: 'current'
-            })
-            const powerRecords = feeds.map(data => data.field3)
-            setPower({
-              "x-axis": xAxisData,
-              "y-axis": powerRecords,
-              color: "#0000FF",
-              seriesName: 'power'
-            })
-            const energyRecords = feeds.map(data => data.field4)
-            setEnergy({
-              "x-axis": xAxisData,
-              "y-axis": energyRecords,
-              color: "#FF4500",
-              seriesName: 'energy'
-            })
-            const frequencyRecords = feeds.map(data => data.field5)
-            setFrequency({
-              "x-axis": xAxisData,
-              "y-axis": frequencyRecords,
-              color: "#1E90FF",
-              seriesName: 'frequency'
-            })
-            const powerfactorRecords = feeds.map(data => data.field6)
-            setPowerfactor({
-              "x-axis": xAxisData,
-              "y-axis": powerfactorRecords,
-              color: "#800080",
-              seriesName: 'power factor'
-            })
-            const temperatureRecords = feeds.map(data => data.field7)
-            setTemperature({
-              "x-axis": xAxisData,
-              "y-axis": temperatureRecords,
-              color: "#FFA500",
-              seriesName: 'temperature'
-            })
-
-
-
-
           }
         })
         .catch((err) => console.error("Error fetching ThingSpeak data:", err));
@@ -255,10 +202,9 @@ export const Chartdevice = () => {
 
   }, [Infrom, lastProcessedId]); // Dependency updated to track latest processed ID
 
-  if (alerts === null || liveChartData === null || lastFeedTimestamp === null || !Ax || !Ay || !Az || !Gx || !Gy || !Gz || !voltage || !current || !power || !energy || !frequency || !powerfactor || !temperature) {
+  if (alerts === null || liveChartData === null || lastFeedTimestamp === null || !Ax || !Ay || !Az || !Gx || !Gy || !Gz) {
     return <Loading />
   }
-
 
   return (
     <div className="chart_device container">
@@ -337,19 +283,7 @@ export const Chartdevice = () => {
         <div className="col-12">
           <h2 className="text-center text-light mt-2 fw-bold">Live Data Charts</h2>
           <div className="d-flex flex-wrap justify-content-center">
-
-            {
-              [voltage, current, power, energy, frequency, powerfactor, temperature].map((chart, i) => (
-                <div className='col-11 col-md-5 col-lg-4 m-2 rounded bg-white' key={i}>
-                {console.log("chart:", chart)}
-                <Livechart data={[chart]} title={chart.seriesName} lineStyle={'smooth'} lineWidth={3} chartType={'line'} controls={controls} />
-                </div>
-              ))
-            }
-
-
-
-            {/* {liveChartData.length === 0 ? (
+            {liveChartData.length === 0 ? (
               <p>No Data Available for Charts</p>
             ) : (
               liveChartData.map((chart, index) => (
@@ -368,7 +302,7 @@ export const Chartdevice = () => {
                   />
                 </div>
               ))
-            )} */}
+            )}
           </div>
 
           <div className='p-3 border rounded m-2 bg-primary'>
