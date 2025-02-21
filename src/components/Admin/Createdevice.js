@@ -27,9 +27,9 @@ export const Createdevice = () => {
     temperatureValue: "",
     temperatureLow: "",
     temperatureHigh: "",
-    vibrationValue: "",
-    vibrationLow: "",
-    vibrationHigh: "",
+    // vibrationValue: "",
+    // vibrationLow: "",
+    // vibrationHigh: "",
     energyValue: "",
     energyLow : "",
     energyHigh:"",
@@ -125,7 +125,7 @@ export const Createdevice = () => {
             { label: "Power", value: "powerValue", low: "powerLow", high: "powerHigh" },
             { label: "Power Factor", value: "powerFactorValue", low: "powerFactorLow", high: "powerFactorHigh" },
             { label: "Temperature", value: "temperatureValue", low: "temperatureLow", high: "temperatureHigh" },
-            { label: "Vibration", value: "vibrationValue", low: "vibrationLow", high: "vibrationHigh" },
+            // { label: "Vibration", value: "vibrationValue", low: "vibrationLow", high: "vibrationHigh" },
            
            
             { label: "Energy", value: "energyValue", low: "energyLow", high: "energyHigh" },

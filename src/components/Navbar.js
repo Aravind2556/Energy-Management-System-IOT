@@ -8,7 +8,6 @@ const Navbar = () => {
   const navigate = useNavigate()
   const apiurl = process.env.REACT_APP_API_URL
   const {Auth}= useContext(DContext)
-  console.log("Auth By navbar",Auth)
 
 
   function isLogout() {

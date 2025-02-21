@@ -16,7 +16,7 @@ export const Updatedata = () => {
     power: { value: "", low: "", high: "" },
     powerfactor: { value: "", low: "", high: "" },
     tempeature: { value: "", low: "", high: "" },
-    vibration: { value: "", low: "", high: "" },
+    // vibration: { value: "", low: "", high: "" },
     energy: {value : "" , low : "" , high : ""},
     frequency : {value :"" , low : "", high : ""},
     
@@ -115,7 +115,7 @@ export const Updatedata = () => {
             { label: "Power", key: "power" },
             { label: "Power Factor", key: "powerfactor" },
             { label: "Tempeature", key: "tempeature" },
-            { label: "Vibration", key: "vibration" },
+            // { label: "Vibration", key: "vibration" },
             { label: "Energy", key:"energy"  },
             { label: "Frequency", key:"frequency" },
 
